@@ -136,38 +136,63 @@ function Scanner({ onCancel, onScanned, onCameraActive, onScanResult }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [detectedQR, setDetectedQR] = useState(null);
   const scanIntervalRef = useRef(null);
+  const streamRef = useRef(null);
 
   useEffect(() => {
     const startCamera = async () => {
       try {
-        // Request camera permission
-        const stream = await navigator.mediaDevices.getUserMedia({
+        console.log("Requesting camera access...");
+        
+        // Request camera permission with different constraints
+        const constraints = {
           video: {
-            facingMode: "environment",
+            facingMode: { ideal: "environment" },
             width: { ideal: 1280 },
             height: { ideal: 720 },
           },
-        });
+          audio: false,
+        };
+
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        console.log("Camera access granted!");
 
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
-          onCameraActive(true);
-          setCameraPermission("granted");
-          setScanStatus("scanning");
-          startQRScanning();
+          streamRef.current = stream;
+          
+          // Wait for video to be ready
+          videoRef.current.onloadedmetadata = () => {
+            videoRef.current.play().catch(err => {
+              console.error("Error playing video:", err);
+            });
+            onCameraActive(true);
+            setCameraPermission("granted");
+            setScanStatus("scanning");
+            startQRScanning();
+          };
         }
       } catch (error) {
         console.error("Camera access error:", error);
+        onCameraActive(false);
+        
         if (error.name === "NotAllowedError") {
           setCameraPermission("denied");
-          setErrorMessage("Camera permission denied. Please enable camera access.");
+          setErrorMessage(
+            "Camera permission denied. Please:\n1. Check browser settings\n2. Allow camera access\n3. Click Retry"
+          );
         } else if (error.name === "NotFoundError") {
-          setErrorMessage("No camera device found.");
+          setCameraPermission("denied");
+          setErrorMessage("No camera device found on this device.");
+        } else if (error.name === "NotReadableError") {
+          setCameraPermission("denied");
+          setErrorMessage(
+            "Camera is in use by another app. Please close it and try again."
+          );
         } else {
-          setErrorMessage("Failed to access camera: " + error.message);
+          setCameraPermission("denied");
+          setErrorMessage(`Camera error: ${error.message}\n\nUse "Simulate Scan" to continue.`);
         }
         setScanStatus("error");
-        onCameraActive(false);
       }
     };
 
@@ -175,12 +200,11 @@ function Scanner({ onCancel, onScanned, onCameraActive, onScanResult }) {
 
     return () => {
       // Cleanup camera stream
-      if (videoRef.current && videoRef.current.srcObject) {
-        const tracks = videoRef.current.srcObject.getTracks();
-        tracks.forEach((track) => track.stop());
-      }
       if (scanIntervalRef.current) {
         clearInterval(scanIntervalRef.current);
+      }
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
   }, [onCameraActive]);
@@ -195,35 +219,46 @@ function Scanner({ onCancel, onScanned, onCameraActive, onScanResult }) {
     const scanInterval = 100; // Scan every 100ms
 
     scanIntervalRef.current = setInterval(() => {
-      if (video.readyState === video.HAVE_ENOUGH_DATA) {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
+      try {
+        if (video.readyState === video.HAVE_ENOUGH_DATA) {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
 
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const code = jsQR(imageData.data, imageData.width, imageData.height, {
-          inversionAttempts: 2,
-        });
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const code = jsQR(imageData.data, imageData.width, imageData.height, {
+            inversionAttempts: 2,
+          });
 
-        if (code) {
-          setScanStatus("detected");
-          setDetectedQR(code.data);
-          onScanResult(code.data);
+          if (code) {
+            console.log("QR Code detected:", code.data);
+            setScanStatus("detected");
+            setDetectedQR(code.data);
+            onScanResult(code.data);
 
-          // Auto-proceed after detecting QR
-          setTimeout(() => {
-            onScanned();
-          }, 1500);
+            // Auto-proceed after detecting QR
+            setTimeout(() => {
+              onScanned();
+            }, 1500);
+          }
         }
+      } catch (err) {
+        console.error("QR scanning error:", err);
       }
     }, scanInterval);
   };
 
+  const handleRetry = () => {
+    window.location.reload();
+  };
+
   const handleManualScan = () => {
+    console.log("Simulating scan...");
     // Simulate scan for demo purposes
     setScanStatus("detected");
-    setDetectedQR("https://studentdeals.com/verify?code=VELLORE-2024-12345");
-    onScanResult("https://studentdeals.com/verify?code=VELLORE-2024-12345");
+    const simulatedQR = "https://studentdeals.com/verify?code=VELLORE-2024-12345";
+    setDetectedQR(simulatedQR);
+    onScanResult(simulatedQR);
 
     setTimeout(() => {
       onScanned();
@@ -281,8 +316,8 @@ function Scanner({ onCancel, onScanned, onCameraActive, onScanResult }) {
           <div className="camera-error">
             <AlertCircle size={48} />
             <p>{errorMessage || "Camera access is required."}</p>
-            <button className="retry-btn" onClick={() => window.location.reload()}>
-              Retry
+            <button className="retry-btn" onClick={handleRetry}>
+              Retry Camera
             </button>
           </div>
         )}
