@@ -1,0 +1,802 @@
+/* Mobile Portrait Wallet Styles */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: #000;
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+.mobile-portrait-container {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ===== STATUS BAR ===== */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background: #000;
+  border-bottom: 1px solid #222;
+  height: 44px;
+}
+
+.status-icons {
+  display: flex;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.battery {
+  font-size: 14px;
+}
+
+/* ===== PAGE SCREENS ===== */
+.page-screen {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* ===== WALLET PAGE ===== */
+.wallet {
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.wallet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 16px;
+}
+
+.wallet-header > div:first-child {
+  flex: 1;
+}
+
+.tiny-brand {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.wallet-header h1 {
+  font-size: 28px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.credentials-label {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #666;
+  margin-top: 8px;
+}
+
+.profile-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* ===== CREDENTIAL CARD ===== */
+.credential-card {
+  margin: 16px;
+  padding: 16px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-radius: 12px;
+  border: 1px solid #333;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.student-id {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #aaa;
+}
+
+.cap {
+  width: 24px;
+  height: 24px;
+  background: rgba(102, 126, 234, 0.2);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #667eea;
+}
+
+.verified {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: #4ade80;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.initials {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.identity h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.identity p {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: #888;
+}
+
+/* ===== DETAILS ===== */
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-row span {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.detail-row b {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.gradient-line {
+  height: 2px;
+  background: linear-gradient(90deg, #667eea, #764ba2, transparent);
+  margin: 16px -16px -16px -16px;
+}
+
+/* ===== SMALL ACTIONS ===== */
+.small-actions {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.small-actions button {
+  flex: 1;
+  padding: 10px;
+  background: #1a1a2e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.small-actions button:active {
+  background: #222;
+}
+
+/* ===== SCAN BUTTON ===== */
+.scan-main {
+  margin: 0 16px;
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.scan-main:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* ===== SCANNER PAGE ===== */
+.scanner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #000;
+  border-bottom: 1px solid #222;
+}
+
+.scanner-title {
+  flex: 1;
+  text-align: center;
+}
+
+.scanner-title div {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #666;
+}
+
+.scanner-title b {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.round-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a2e;
+  color: #fff;
+  transition: background 0.2s;
+}
+
+.round-btn:active {
+  background: #2a2a3e;
+}
+
+/* ===== VERIFIER PILL ===== */
+.verifier-pill {
+  margin: 12px 16px;
+  padding: 8px 12px;
+  background: rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  border-radius: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #aaa;
+}
+
+.blue-dot {
+  width: 8px;
+  height: 8px;
+  background: #667eea;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.verifier-pill b {
+  color: #667eea;
+}
+
+.verifier-pill .lock {
+  margin-left: auto;
+  color: #666;
+}
+
+/* ===== CAMERA CONTAINER ===== */
+.camera-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+.camera-feed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scan-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 3px solid #667eea;
+}
+
+.corner.tl {
+  top: 20%;
+  left: 15%;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner.tr {
+  top: 20%;
+  right: 15%;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner.bl {
+  bottom: 20%;
+  left: 15%;
+  border-right: none;
+  border-top: none;
+}
+
+.corner.br {
+  bottom: 20%;
+  right: 15%;
+  border-left: none;
+  border-top: none;
+}
+
+.scan-indicator {
+  width: 200px;
+  height: 200px;
+  border: 2px solid rgba(102, 126, 234, 0.5);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.scan-indicator.scanning .pulse {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+}
+
+.scan-indicator.detected {
+  border-color: #4ade80;
+}
+
+.detected-indicator {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4ade80;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.camera-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #888;
+  text-align: center;
+  padding: 32px 16px;
+}
+
+.camera-error p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.retry-btn {
+  padding: 10px 24px;
+  background: #667eea;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+/* ===== SCAN INSTRUCTIONS ===== */
+.scan-instructions {
+  padding: 16px;
+  text-align: center;
+}
+
+.scan-instructions b {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.scan-instructions p {
+  font-size: 12px;
+  color: #888;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ===== SCAN ACTIONS ===== */
+.scan-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px 16px;
+}
+
+.simulate-btn {
+  padding: 12px;
+  background: rgba(102, 126, 234, 0.2);
+  border: 1px solid #667eea;
+  border-radius: 8px;
+  color: #667eea;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.simulate-btn:active {
+  background: rgba(102, 126, 234, 0.3);
+}
+
+.cancel-button {
+  padding: 12px;
+  background: #1a1a2e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.cancel-button:active {
+  background: #2a2a3e;
+}
+
+/* ===== HOME INDICATOR ===== */
+.home-indicator {
+  height: 28px;
+  background: #000;
+}
+
+/* ===== PRIVACY PAGE ===== */
+.privacy-page {
+  background: #111;
+  justify-content: flex-end;
+}
+
+.privacy-sheet {
+  background: #1a1a2e;
+  border-radius: 24px 24px 0 0;
+  padding: 24px 16px 16px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.grabber {
+  width: 40px;
+  height: 4px;
+  background: #444;
+  border-radius: 2px;
+  margin: -12px auto 16px;
+}
+
+.gate-icon {
+  text-align: center;
+  margin-bottom: 12px;
+  color: #667eea;
+}
+
+.privacy-sheet h1 {
+  text-align: center;
+  font-size: 20px;
+  margin: 0 0 8px 0;
+}
+
+.privacy-sheet .request {
+  text-align: center;
+  color: #888;
+  font-size: 13px;
+  margin: 0 0 16px 0;
+}
+
+/* ===== SHARED CARD ===== */
+.shared-card {
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.shared-title {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #4ade80;
+  margin-bottom: 8px;
+}
+
+.shared-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #4ade80;
+}
+
+.shared-card p {
+  font-size: 12px;
+  color: #888;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ===== PRIVATE CARD ===== */
+.private-card {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.private-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 11px;
+}
+
+.private-head span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+.private-head b {
+  color: #ef4444;
+  letter-spacing: 1px;
+}
+
+.private-row {
+  display: grid;
+  grid-template-columns: 20px 80px 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+  font-size: 12px;
+}
+
+.private-row:last-child {
+  border-bottom: none;
+}
+
+.private-icon {
+  display: flex;
+  align-items: center;
+  color: #ef4444;
+}
+
+.private-label {
+  color: #888;
+  font-size: 11px;
+}
+
+.private-value {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.private-value .redacted {
+  color: #666;
+  text-decoration: line-through;
+}
+
+.private-value em {
+  font-size: 10px;
+  color: #ef4444;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.redacted.dots {
+  letter-spacing: 2px;
+}
+
+/* ===== SCAN RESULT ===== */
+.scan-result {
+  background: rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  font-size: 11px;
+  color: #667eea;
+  word-break: break-all;
+}
+
+/* ===== APPROVAL BUTTONS ===== */
+.approve {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.approve:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.reject {
+  width: 100%;
+  padding: 14px;
+  background: #1a1a2e;
+  border: 1px solid #333;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.reject:active {
+  background: #2a2a3e;
+}
+
+/* ===== BOTTOM LINE ===== */
+.bottom-line {
+  height: 28px;
+  background: #1a1a2e;
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+.wallet::-webkit-scrollbar,
+.privacy-sheet::-webkit-scrollbar {
+  width: 4px;
+}
+
+.wallet::-webkit-scrollbar-track,
+.privacy-sheet::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.wallet::-webkit-scrollbar-thumb,
+.privacy-sheet::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 2px;
+}
+
+.wallet::-webkit-scrollbar-thumb:hover,
+.privacy-sheet::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 320px) {
+  .wallet-header h1 {
+    font-size: 24px;
+  }
+
+  .credential-card {
+    margin: 12px;
+    padding: 12px;
+  }
+
+  .details {
+    gap: 12px;
+  }
+
+  .small-actions {
+    gap: 6px;
+  }
+}
