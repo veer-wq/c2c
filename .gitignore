@@ -1,0 +1,33 @@
+.idea/
+
+# Python secrets, virtual environments, caches, and local data
+backend/venv/
+.venv/
+__pycache__/
+**pycache**/
+*.pyc
+*.db
+*.sqlite
+*.sqlite3
+*.pem
+.env
+.env.*
+
+# Backend
+backend/venv/
+backend/__pycache__/
+backend/issuer_private_key.pem
+backend/proofpass.db
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.cache/
+frontend/.env*
+frontend/.vite/
+frontend/vite.config.*.timestamp-*
+frontend/*.tsbuildinfo
+*-debug.log*
+logs/
+*.log

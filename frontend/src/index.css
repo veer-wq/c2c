@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import 'tailwindcss';
+
+html,
+body,
+#root {
+  height: 100%;
+  background: #000;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@theme inline {
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/*
+  Theme tokens for the StudentDeals / verification-flow screens
+  (V01Checkout, V02QRModal, V03Verified, V04Failed). These were
+  referenced via var(--...) but never defined, so those screens
+  rendered unstyled. The ProofPass wallet phone UI uses its own
+  literal dark-mode colors and does not depend on these.
+*/
+:root {
+  --background: #f5f6f8;
+  --foreground: #0f1726;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --primary: #0f2744;
+  --primary-foreground: #ffffff;
+  --accent: #00c896;
+  --accent-foreground: #04241c;
+  --muted-foreground: #64748b;
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
